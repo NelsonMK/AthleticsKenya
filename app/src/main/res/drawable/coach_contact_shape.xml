@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorPrimaryDark">
+
+    <item>
+        <shape android:shape="rectangle" >
+            <corners
+                android:bottomLeftRadius="27dp"
+                android:bottomRightRadius="27dp"
+                android:topLeftRadius="27dp"
+                android:topRightRadius="27dp"
+                />
+
+            <solid
+                android:color="#FFFFFF"
+                />
+            <stroke
+                android:width="1dp"
+                android:color="@color/colorPrimaryDark"
+                />
+            <size
+                android:width="0dp"
+                android:height="0dp"
+                />
+        </shape>
+    </item>
+</ripple>

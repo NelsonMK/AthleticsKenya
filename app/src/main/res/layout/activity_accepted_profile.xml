@@ -1,0 +1,250 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    tools:context=".AcceptedProfile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="5dp"
+            android:elevation="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginBottom="@dimen/loginViewsMargin">
+        <RelativeLayout
+            android:id="@+id/relative_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Full names: "
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/next_accepted_firstname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/name_label"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="First Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/space"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/next_accepted_firstname"/>
+            <TextView
+                android:id="@+id/next_accepted_lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/space"
+                android:layout_marginTop="5dp"
+                android:text="Last Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/label_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/name_label"
+                android:text="Phone number: "
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/next_accepted_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_phone"
+                android:layout_below="@id/next_accepted_lastname"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Phone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/label_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_phone"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Email: "
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/next_accepted_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_email"
+                android:layout_below="@id/next_accepted_phone"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Email"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/label_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D.O.B: "
+                android:textColor="#000000"
+                android:layout_below="@id/label_email"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/next_accepted_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D.O.B"
+                android:textColor="#000000"
+                android:layout_below="@id/label_email"
+                android:layout_toEndOf="@id/label_date"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/label_race"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_date"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Race type: "
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/next_accepted_race"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_location"
+                android:layout_below="@id/label_date"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="race"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/label_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_race"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Location: "
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/next_accepted_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_location"
+                android:layout_below="@id/label_race"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Region"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/head_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/next_accepted_location"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Height: "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/next_accepted_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/next_accepted_location"
+                android:layout_toEndOf="@id/head_height"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="0.0"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/head_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/next_accepted_location"
+                android:layout_toEndOf="@id/next_accepted_height"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Weight: "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/next_accepted_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/next_accepted_location"
+                android:layout_toEndOf="@id/head_weight"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="00.0"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"/>
+            <ImageView
+                android:id="@+id/accepted_pic"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/diet_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/coach_contact_shape"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/card_head"
+            android:text="Diet"/>
+        <Button
+            android:id="@+id/chat_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/coach_contact_shape"
+            android:layout_below="@id/diet_button"
+            android:text="chat"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+
+        <ScrollView
+            android:id="@+id/scrollView_diet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/diet_button"
+            android:visibility="visible"
+            android:layout_marginTop="5dp">
+
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</FrameLayout>

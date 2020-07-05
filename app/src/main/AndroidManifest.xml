@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.example.athleticskenya">
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name=".AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        android:installLocation="internalOnly">
+
+        <activity android:name=".RecommedDiet"
+            android:parentActivityName=".AcceptedProfile">
+
+        </activity>
+        <activity android:name=".Chatroom" />
+        <activity android:name=".Awards"
+            android:label="Records"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MyCoach"
+            android:parentActivityName=".ProfileActivity"/>
+        <activity android:name=".EditProfile"
+            android:parentActivityName=".ProfileActivity"/>
+        <activity android:name=".AccelerometerActivity" />
+        <activity android:name=".AcceptedProfile"
+            android:parentActivityName=".AcceptedAthletes"/>
+        <activity android:name=".AcceptedAthletes"
+            android:parentActivityName=".CoachActivity"/>
+        <activity android:name=".Coach_Athlete_Request"
+            android:parentActivityName=".CoachActivity"/>
+
+        <activity
+            android:name=".DietActivity"
+            android:label="Diet"
+            android:parentActivityName=".AthleteActivity" />
+        <activity
+            android:name=".Training_GroundsActivity"
+            android:label="Training Grounds"
+            android:parentActivityName=".AthleteActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile"
+            android:parentActivityName=".AthleteActivity" />
+        <activity
+            android:name=".CoachListActivity"
+            android:parentActivityName=".AthleteActivity"
+            android:theme="@style/Tab" />
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HeadActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SecretaryActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ManagerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CoachActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SignupActivity"
+            android:label="@string/nav_sign_up"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".AthleteActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/log_in"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Register services -->
+        <receiver android:name=".Utils.NetworkStateChecker">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

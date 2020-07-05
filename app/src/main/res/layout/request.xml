@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/athlete_fname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="firstname"/>
+
+        <TextView
+            android:id="@+id/space_one"
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/athlete_fname"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/athlete_lname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/space_one"
+            android:layout_centerVertical="true"
+            android:text="lastname"/>
+
+        <TextView
+            android:id="@+id/space_two"
+            android:layout_width="6dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/athlete_lname"/>
+
+        <ImageView
+            android:id="@+id/accept_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/space_three"
+            android:src="@drawable/accept"/>
+
+        <TextView
+            android:id="@+id/space_three"
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/reject_request"/>
+        <ImageView
+            android:id="@+id/reject_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/space_four"
+            android:src="@drawable/decline"/>
+        <TextView
+            android:id="@+id/space_four"
+            android:layout_width="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

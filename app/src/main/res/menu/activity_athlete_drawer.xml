@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/coach"
+            android:checkable="true"
+            android:icon="@drawable/coach"
+            android:title="Coach" />
+        <item
+            android:id="@+id/training_grounds"
+            android:checkable="true"
+            android:icon="@drawable/track"
+            android:title="Training Grounds" />
+        <item
+            android:id="@+id/diet"
+            android:checkable="true"
+            android:icon="@drawable/diet1"
+            android:title="Diet" />
+        <!-- <item
+             android:id="@+id/training_kits"
+             android:checkable="true"
+             android:icon="@drawable/kit1"
+             android:title="Training Kits" />-->
+       <!-- <item
+            android:id="@+id/rules"
+            android:checkable="true"
+            android:icon="@drawable/rules"
+            android:title="Rules and Regulations" />-->
+        <item
+            android:id="@+id/iaaf"
+            android:gravity="center"
+            android:checkable="true"
+            android:icon="@drawable/rules"
+            android:title="Records" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_feedback"
+                android:checkable="true"
+                android:icon="@drawable/feedback"
+                android:title="Feedback" />
+            <item
+                android:id="@+id/nav_share"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+        </menu>
+    </item>
+
+</menu>
