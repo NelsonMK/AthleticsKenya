@@ -7,9 +7,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.athleticskenya.Utils.Cipher;
 import com.example.athleticskenya.adapters.MessageListAdapter;
 import com.example.athleticskenya.database.DatabaseHandler;
 import com.example.athleticskenya.getterClasses.Message;
@@ -44,7 +40,7 @@ import java.util.Map;
 import static com.example.athleticskenya.AcceptedProfile.EXTRA_CONTACT_EXTRA;
 import static com.example.athleticskenya.AcceptedProfile.EXTRA_ID_EXTRA;
 
-public class Chatroom extends AppCompatActivity {
+public class AthleteChatRoom extends AppCompatActivity {
 
     RecyclerView recyclerView;
     EditText edit_message;
@@ -59,14 +55,14 @@ public class Chatroom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatroom);
+        setContentView(R.layout.activity_athlete_chat_room);
 
         User user = db.getUser(id);
 
         edit_message = findViewById(R.id.message);
         messageList = new ArrayList<>();
         int id = user.getId();
-        messageListAdapter = new MessageListAdapter(Chatroom.this, messageList, id);
+        messageListAdapter = new MessageListAdapter(AthleteChatRoom.this, messageList, id);
         recyclerView = findViewById(R.id.chatRoom);
         recyclerView.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -87,21 +83,19 @@ public class Chatroom extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                    messageList.clear();
-                    fetchMessages();
+                messageList.clear();
+                fetchMessages();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
     }
 
     private void fetchMessages() {
         User user = db.getUser(id);
-        Intent intent = getIntent();
-        final String receiver_id = intent.getStringExtra(EXTRA_ID_EXTRA);
         String id = String.valueOf(user.getId());
-        //String contact = user.getContact();
-        final String contact = intent.getStringExtra(EXTRA_CONTACT_EXTRA);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLS.URL_CHATS + receiver_id ,
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLS.URL_CHATS + id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -122,8 +116,6 @@ public class Chatroom extends AppCompatActivity {
                                 messageList.add(messageObject);
                             }
 
-                           /* messageListAdapter = new MessageListAdapter(Chatroom.this, messageList, user.getId());
-                            recyclerView.setAdapter(messageListAdapter);*/
                             messageListAdapter.notifyDataSetChanged();
                             scrollToBottom();
 
@@ -142,12 +134,12 @@ public class Chatroom extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
-    private void sendMessage(){
+    private void sendMessage() {
 
         User user = db.getUser(id);
         Intent intent = getIntent();
-        final String receiver_id = intent.getStringExtra(EXTRA_ID_EXTRA);
-        final String contact = intent.getStringExtra(EXTRA_CONTACT_EXTRA);
+        final String receiver_id = String.valueOf(user.getId());
+        final String contact = user.getContact();
         final String user_id = String.valueOf(user.getId());
         final String message = edit_message.getText().toString().trim();
         final String sentAt = getTimeStamp();
@@ -173,10 +165,11 @@ public class Chatroom extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject obj = new JSONObject(response);
 
-                            Toast.makeText(Chatroom.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AthleteChatRoom.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -210,8 +203,7 @@ public class Chatroom extends AppCompatActivity {
 
     }
 
-
-    private void scrollToBottom(){
+    private void scrollToBottom() {
         messageListAdapter.notifyDataSetChanged();
         if (messageListAdapter.getItemCount() > 1){
             recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, messageListAdapter.getItemCount() - 1);
@@ -221,18 +213,5 @@ public class Chatroom extends AppCompatActivity {
     public static String getTimeStamp() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm aa");
         return format.format(new Date());
-    }
-
-    public void playBeep() {
-
-        try {
-            Uri notification = RingtoneManager
-                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-                    notification);
-            r.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

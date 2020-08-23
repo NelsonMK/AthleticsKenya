@@ -1,12 +1,10 @@
 package com.example.athleticskenya;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,7 +16,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,7 +61,7 @@ public class RecommedDiet extends AppCompatActivity {
         uploadDiet();
     }
 
-    void textBox(){
+    void textBox() {
 
         textView1 = findViewById(R.id.input_food_name);
         // textView1.setText(breakfast.getFood());
@@ -111,7 +108,7 @@ public class RecommedDiet extends AppCompatActivity {
         dinner_fats = findViewById(R.id.input_dinner_fats);
     }
 
-    void cardDesign(){
+    void cardDesign() {
                 /*
         card view design
          */
@@ -154,7 +151,7 @@ public class RecommedDiet extends AppCompatActivity {
          */
     }
 
-    void uploadDiet(){
+    void uploadDiet() {
         button = findViewById(R.id.btn_breakfast);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -607,18 +604,6 @@ public class RecommedDiet extends AppCompatActivity {
 
     }
 
-    public int colorOne(){
-        return Color.argb(255, 133, 147, 88);
-    }
-
-    public int colorTwo(){
-        return Color.argb(255, 222, 127, 37);
-    }
-
-    public int colorThree(){
-        return Color.argb(255, 72, 182, 135);
-    }
-
     private void loadBreakfast() {
         Intent intent = getIntent();
         String id = intent.getStringExtra(EXTRA_ID_EXTRA);
@@ -733,4 +718,17 @@ public class RecommedDiet extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+    public int colorOne(){
+        return Color.argb(255, 133, 147, 88);
+    }
+
+    public int colorTwo(){
+        return Color.argb(255, 222, 127, 37);
+    }
+
+    public int colorThree(){
+        return Color.argb(255, 72, 182, 135);
+    }
+
 }

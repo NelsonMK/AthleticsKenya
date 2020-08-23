@@ -35,7 +35,6 @@ import com.example.athleticskenya.Utils.NetworkStateChecker;
 import com.example.athleticskenya.adapters.EventsAdapter;
 import com.example.athleticskenya.database.DatabaseHandler;
 import com.example.athleticskenya.getterClasses.Events;
-import com.example.athleticskenya.getterClasses.User;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -92,7 +91,6 @@ public class MainActivity extends AppCompatActivity
             this.finish();
             switch (class1) {
                 case 1:
-                    //startActivity(new Intent(SplashActivity.this, AthleteActivity.class));
                     Intent athlete = new Intent(MainActivity.this, AthleteActivity.class);
                     athlete.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(athlete);
@@ -141,7 +139,12 @@ public class MainActivity extends AppCompatActivity
         eventsList = new ArrayList<>();
 
         registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        loadSQLiteEvents();
+
+        if (eventsList.isEmpty()) {
+            loadServerEvents();
+        } else {
+            loadSQLiteEvents();
+        }
 
     }
 
@@ -158,10 +161,16 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    /*@Override
+   /* @Override
     protected void onDestroy(){
         unregisterReceiver(new NetworkStateChecker());
         super.onDestroy();
+    }*/
+
+    /*@Override
+    protected void onPause() {
+        unregisterReceiver(new NetworkStateChecker());
+        super.onPause();
     }*/
 
     @Override
@@ -248,7 +257,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onResponse(String response) {
                         try {
-
+                            Log.i("events","" + response);
                             JSONArray array = new JSONArray(response);
 
                             for (int i = 0; i < array.length(); i++) {

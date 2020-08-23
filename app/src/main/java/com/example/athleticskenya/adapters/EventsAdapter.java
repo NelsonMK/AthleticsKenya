@@ -32,25 +32,26 @@ import com.example.athleticskenya.getterClasses.Events;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsViewHolder> implements Filterable{
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsViewHolder> implements Filterable {
 
     public static final String EXTRA_TITLES = "title";
     public static final String EXTRA_DETAILS = "details";
     public static final String EXTRA_IMAGE = "image";
-    private Context mCtx;
+    private Context context;
     private List<Events> eventsList;
     private List<Events> new_eventsList;
     private int lastPosition = -1;
 
-    public EventsAdapter(Context mCtx, List<Events> eventsList) {
-        this.mCtx = mCtx;
+    public EventsAdapter(Context context, List<Events> eventsList) {
+        this.context = context;
         this.eventsList = eventsList;
         new_eventsList = new ArrayList<>(eventsList);
     }
+
     @NonNull
     @Override
     public EventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        LayoutInflater inflater = LayoutInflater.from(context);
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.layout, null);
         return new EventsViewHolder(view);
     }
@@ -69,10 +70,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
         holder.tvv3.setText(events.getDate());
         holder.tvv4.setText(events.getTime());
         holder.tvv5.setText(events.getDetails());
-        if (events.getImage().equals("")){
-            holder.ivv.setVisibility(View.GONE);
-        } else {
-            Glide.with(mCtx)
+            Glide.with(context)
                     .load(events.getImage())
                     .listener(new RequestListener<Drawable>() {
                         @Override
@@ -90,7 +88,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
                     .error(R.drawable.no_image)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .into(holder.ivv);
-        }
+
         setAnimation(holder.itemView, position);
 
     }
@@ -100,7 +98,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition)
         {
-            Animation animation = AnimationUtils.loadAnimation(mCtx, R.anim.slide_in_up);
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
@@ -178,11 +176,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
             int i = getAdapterPosition();
             Events events = eventsList.get(i);
 
-            Intent intent = new Intent(mCtx, DetailActivity.class);
+            Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra(EXTRA_TITLES, events.getEventname());
             intent.putExtra(EXTRA_IMAGE, events.getImage());
             intent.putExtra(EXTRA_DETAILS, events.getMore_details());
-            mCtx.startActivity(intent);
+            context.startActivity(intent);
 
             if (v == share){
 
@@ -192,7 +190,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
                         + "\n" + events.getImage() +"\n" + events.getDetails() +
                         "\nFind more about the event in Athletics Kenya app available at play store");
                 share.setType("text/plain");
-                mCtx.startActivity(Intent.createChooser(share, "Share To"));
+                context.startActivity(Intent.createChooser(share, "Share To"));
             }
         }
     }

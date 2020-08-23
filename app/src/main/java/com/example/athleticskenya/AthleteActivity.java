@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -38,6 +37,7 @@ import com.example.athleticskenya.Utils.NetworkStateChecker;
 import com.example.athleticskenya.adapters.EventsAdapter;
 import com.example.athleticskenya.database.DatabaseHandler;
 import com.example.athleticskenya.getterClasses.Events;
+import com.example.athleticskenya.getterClasses.Notifications;
 import com.example.athleticskenya.getterClasses.User;
 import com.google.android.material.navigation.NavigationView;
 
@@ -45,7 +45,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -100,7 +99,6 @@ public class AthleteActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
         View header = navigationView.getHeaderView(0);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,10 +146,9 @@ public class AthleteActivity extends AppCompatActivity
 
         eventsList = new ArrayList<>();
 
-        registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        //registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        loadSQLiteEvents();
-
+        loadServerEvents();
 
     }
 
@@ -162,11 +159,17 @@ public class AthleteActivity extends AppCompatActivity
         loadServerEvents();
     }*/
 
-    @Override
+   /* @Override
     protected void onDestroy(){
         unregisterReceiver(new NetworkStateChecker());
         super.onDestroy();
-    }
+    }*/
+
+    /*@Override
+    protected void onPause() {
+        unregisterReceiver(new NetworkStateChecker());
+        super.onPause();
+    }*/
 
     @Override
     protected void onResume(){
@@ -242,6 +245,8 @@ public class AthleteActivity extends AppCompatActivity
             startActivity(new Intent(AthleteActivity.this, RulesActivity.class));
         } */else if (id == R.id.iaaf){
             startActivity(new Intent(AthleteActivity.this, Awards.class));
+        } else if (id == R.id.nav_notifications) {
+            startActivity(new Intent(AthleteActivity.this, NotificationsActivity.class));
         } else if (id == R.id.nav_feedback) {
             feedback();
         } else if (id == R.id.nav_share) {
@@ -303,8 +308,8 @@ public class AthleteActivity extends AppCompatActivity
                                 ));
                             }
 
-                            EventsAdapter adapter = new EventsAdapter(AthleteActivity.this, eventsList);
-                            recyclerView.setAdapter(adapter);
+                            eventsAdapter = new EventsAdapter(AthleteActivity.this, eventsList);
+                            recyclerView.setAdapter(eventsAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

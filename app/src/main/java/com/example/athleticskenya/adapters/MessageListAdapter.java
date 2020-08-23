@@ -1,11 +1,14 @@
 package com.example.athleticskenya.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.athleticskenya.R;
@@ -18,14 +21,14 @@ import java.util.Date;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageViewHolder> {
 
-    private Context mCtx;
+    private Context context;
     private ArrayList<Message> messagesItems;
     private int userId;
     private int SELF = 786;
     private static String today;
 
-    public MessageListAdapter(Context mCtx, ArrayList<Message> messagesItems, int userId) {
-        this.mCtx = mCtx;
+    public MessageListAdapter(Context context, ArrayList<Message> messagesItems, int userId) {
+        this.context = context;
         this.messagesItems = messagesItems;
         this.userId = userId;
     }
@@ -41,8 +44,9 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         return position;
     }
 
+    @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
 
         // view type is to identify where to render the chat message
@@ -64,13 +68,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message message = messagesItems.get(position);
+
+        holder.message.setTextColor(Color.BLACK);
         holder.message.setText(message.getMessage());
 
-        String timestamp = message.getFromName() +", "+message.getCreatedAt();
-
-        /*if (message.getFromName() != null)
-            timestamp = message.getFromName() + ", " + timestamp;*/
-
+        holder.timestamp.setTextColor(Color.BLACK);
         holder.timestamp.setText(message.getCreatedAt());
     }
 
@@ -79,7 +81,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         return messagesItems.size();
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder{
+    public static class MessageViewHolder extends RecyclerView.ViewHolder{
 
         TextView message, timestamp;
 
@@ -93,6 +95,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     public static String getTimeStamp(String dateStr) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timestamp = "";
@@ -102,6 +105,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         try {
             Date date = format.parse(dateStr);
             SimpleDateFormat todayFormat = new SimpleDateFormat("dd");
+            assert date != null;
             String dateToday = todayFormat.format(date);
             format = dateToday.equals(today) ? new SimpleDateFormat("hh:mm a") : new SimpleDateFormat("dd LLL, hh:mm a");
             String date1 = format.format(date);

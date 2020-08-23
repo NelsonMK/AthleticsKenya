@@ -42,6 +42,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        PrefManager prefManager = PrefManager.getInstance(LoginActivity.this);
+        int class1 = prefManager.userClass();
+        if(prefManager.isLoggedIn()) {
+
+            this.finish();
+            switch (class1) {
+                case 1:
+                    Intent athlete = new Intent(LoginActivity.this, AthleteActivity.class);
+                    athlete.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(athlete);
+                    finish();
+                    break;
+                case 2:
+                    finish();
+                    startActivity(new Intent(LoginActivity.this, CoachActivity.class));
+                    break;
+            }
+        }
+
         db = new DatabaseHandler(this);
 
         init();
@@ -78,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.forgot_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                forgotPasswordDialog();
+                //forgotPasswordDialog();
+                startActivity(new Intent(LoginActivity.this, RecoverPasswordActivity.class));
             }
         });
     }
@@ -88,9 +108,41 @@ public class LoginActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
         //validating inputs
-        /*String email_pattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "gmail.com | yahoo,com$";*/
+        String email_pattern = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@" + "gmail.com$";
+
+        TextInputLayout mail= findViewById(R.id.email);
+        TextInputLayout pass= findViewById(R.id.password);
 
         if (TextUtils.isEmpty(email)) {
+            mail.setError("Please enter your email address!");
+            editTextEmail.requestFocus();
+            return;
+        } else {
+            mail.setError(null);
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mail.setError("Enter a valid email address!");
+            editTextEmail.requestFocus();
+            return;
+        } else {
+            mail.setError(null);
+        }
+        if (!editTextEmail.getText().toString().matches(email_pattern)){
+            mail.setError("Enter a valid email address!");
+            editTextEmail.requestFocus();
+            return;
+        } else {
+            mail.setError(null);
+        }
+        if (TextUtils.isEmpty(password)) {
+            pass.setError("Enter your password!");
+            editTextPassword.requestFocus();
+            return;
+        } else {
+            pass.setError(null);
+        }
+
+       /* if (TextUtils.isEmpty(email)) {
             editTextEmail.setError("Please enter your email!");
             editTextEmail.requestFocus();
             return;
@@ -100,16 +152,16 @@ public class LoginActivity extends AppCompatActivity {
             editTextEmail.requestFocus();
             return;
         }
-        /*if (!editTextEmail.getText().toString().matches(email_pattern)){
+        if (!editTextEmail.getText().toString().matches(email_pattern)){
             editTextEmail.setError("Enter a valid email address!");
             editTextEmail.requestFocus();
             return;
-        }*/
+        }
         if (TextUtils.isEmpty(password)) {
             editTextPassword.setError("Please enter your password!");
             editTextPassword.requestFocus();
             return;
-        }
+        }*/
         //if everything is fine
         UserLogin ul = new UserLogin(email,password);
         ul.execute();
@@ -139,8 +191,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //if no error in response
                 if (!obj.getBoolean("error")) {
-                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
                     //getting the user from the response
                     JSONObject userJson = obj.getJSONObject("user");
 
@@ -161,7 +211,6 @@ public class LoginActivity extends AppCompatActivity {
                     String location = userJson.getString("location");
 
                     String class2 = userJson.getString("class");
-                    String status2 = String.valueOf(userJson.getInt("status"));
 
                     //creating a new user object
                     User user = new User(
@@ -184,9 +233,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     //starting the respective activities
-                    if (status2.equals("0")){ //check if account is confirmed
-                        Toast.makeText(getApplicationContext(), "Account not confirmed!", Toast.LENGTH_SHORT).show();
-                    } else {
                         //store log in session in shared preferences
                         PrefManager.getInstance(getApplicationContext()).setUserLogin(user);
                         //save the user to SQLite database
@@ -205,8 +251,7 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                                 break;
                         }
-                    }
-
+                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                 }

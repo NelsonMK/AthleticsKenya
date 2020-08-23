@@ -46,8 +46,7 @@ public class AcceptedAthletes extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
-
-
+        
         loadAccepted();
 
     }

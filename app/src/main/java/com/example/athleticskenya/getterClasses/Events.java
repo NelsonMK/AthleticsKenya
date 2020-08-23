@@ -10,9 +10,7 @@ public class Events {
     private String details;
     private String more_details;
 
-    public Events(){
-
-    }
+    public Events() {}
 
     public Events (String eventname, String image, String location, String date, String time, String details, String more_details) {
 

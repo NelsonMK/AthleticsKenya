@@ -74,12 +74,12 @@ public class EditProfile extends AppCompatActivity {
 
         profile();
 
-        date_of_birth.setOnClickListener(new View.OnClickListener() {
+       /* date_of_birth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateOfBirth();
             }
-        });
+        });*/
 
         Upload_Btn = findViewById(R.id.upload);
         Upload_Btn.setOnClickListener(new View.OnClickListener() {
@@ -96,16 +96,16 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        if (ContextCompat.checkSelfPermission(EditProfile.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+       /* if (ContextCompat.checkSelfPermission(EditProfile.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{android.Manifest.permission.CAMERA},
                         5);
             }
-        }
+        }*/
 
     }
 
-    void profile(){
+    void profile() {
         /*
         start of setting up profile with data from shared preferences handled by UserManager class
          */
@@ -119,7 +119,7 @@ public class EditProfile extends AppCompatActivity {
         phone.setText(user.getPhone());
         email = findViewById(R.id.email);
         email.setText(user.getEmail());
-        date_of_birth = findViewById(R.id.date_of_birth);
+       /* date_of_birth = findViewById(R.id.date_of_birth);
         date_of_birth.setText(user.getDate_of_birth());
         raceType = findViewById(R.id.raceType);
         raceType.setText(user.getRace_type());
@@ -147,7 +147,7 @@ public class EditProfile extends AppCompatActivity {
             public void onClick(View view) {
                 showPictureDialog();
             }
-        });
+        });*/
         /*
         end of setting up profile
          */
@@ -169,7 +169,7 @@ public class EditProfile extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void showPictureDialog(){
+    private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
@@ -238,30 +238,30 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-    private void updateUser(){
+    private void updateUser() {
         final String update_first_name = first_name.getText().toString().trim();
         final String update_last_name = last_name.getText().toString().trim();
         final String update_phone = phone.getText().toString().trim();
         final String update_email = email.getText().toString().trim();
-        final String update_date_of_birth = date_of_birth.getText().toString().trim();
+        /*final String update_date_of_birth = date_of_birth.getText().toString().trim();
         final String update_raceType = raceType.getText().toString().trim();
         final String update_height = height.getText().toString().trim();
         final String update_weight = weight.getText().toString().trim();
-        final String update_location = location.getText().toString().trim();
+        final String update_location = location.getText().toString().trim();*/
         final String user_id = String.valueOf(id);
 
-        FixBitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+        /*FixBitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         byteArray = byteArrayOutputStream.toByteArray();
-        update_picture = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        update_picture = Base64.encodeToString(byteArray, Base64.DEFAULT);*/
 
         String mobile_pattern = "^07[0-9]{8}$";
         String email_pattern = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@" + "gmail.com$";
 
-        if (TextUtils.isEmpty(update_picture)){
+       /* if (TextUtils.isEmpty(update_picture)){
             Toast.makeText(getApplicationContext(), "Please choose a picture!", Toast.LENGTH_SHORT).show();
             profile_picture.requestFocus();
             return;
-        }
+        }*/
         if (TextUtils.isEmpty(update_first_name)) {
             first_name.setError("Please enter your first name!");
             first_name.requestFocus();
@@ -307,7 +307,7 @@ public class EditProfile extends AppCompatActivity {
             email.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(update_height)){
+     /*   if (TextUtils.isEmpty(update_height)){
             height.setError("Enter your height!");
             height.requestFocus();
             return;
@@ -321,10 +321,9 @@ public class EditProfile extends AppCompatActivity {
             location.setError("Enter your height!");
             location.requestFocus();
             return;
-        }
+        }*/
 
-        UpdateUser updateUser = new UpdateUser(update_picture, update_first_name, update_last_name,update_phone,update_email, update_date_of_birth,
-                update_raceType, user_id, update_height, update_weight, update_location);
+        UpdateUser updateUser = new UpdateUser(update_first_name, update_last_name,update_phone,update_email, user_id);
         updateUser.execute();
     }
 
@@ -334,19 +333,18 @@ public class EditProfile extends AppCompatActivity {
         private String update_picture, update_first_name, update_last_name,update_phone,update_email, user_id, update_height, update_weight, update_location;
         private String update_date_of_birth, update_raceType;
 
-        UpdateUser(String update_picture, String update_first_name, String update_last_name, String update_phone, String update_email,
-                   String update_date_of_birth, String update_raceType, String user_id, String update_height, String update_weight, String update_location){
-            this.update_picture = update_picture;
+        UpdateUser(String update_first_name, String update_last_name, String update_phone, String update_email, String user_id){
+            //this.update_picture = update_picture;
             this.update_first_name = update_first_name;
             this.update_last_name = update_last_name;
             this.update_phone = update_phone;
             this.update_email = update_email;
-            this.update_date_of_birth = update_date_of_birth;
-            this.update_raceType = update_raceType;
+          /*  this.update_date_of_birth = update_date_of_birth;
+            this.update_raceType = update_raceType;*/
             this.user_id = user_id;
-            this.update_height = update_height;
+           /* this.update_height = update_height;
             this.update_weight = update_weight;
-            this.update_location = update_location;
+            this.update_location = update_location;*/
         }
         @Override
         protected void onPreExecute() {
@@ -360,17 +358,17 @@ public class EditProfile extends AppCompatActivity {
             RequestHandler requestHandler = new RequestHandler();
 
             HashMap<String, String> params = new HashMap<>();
-            params.put("image", update_picture);
+           // params.put("image", update_picture);
             params.put("first_name", Cipher.encrypt(update_first_name));
             params.put("last_name", update_last_name);
             params.put("phone", update_phone);
             params.put("email", update_email);
-            params.put("date_of_birth", update_date_of_birth);
-            params.put("race_type", update_raceType);
+         /*   params.put("date_of_birth", update_date_of_birth);
+            params.put("race_type", update_raceType);*/
             params.put("id", user_id);
-            params.put("height", update_height);
+           /* params.put("height", update_height);
             params.put("weight", update_weight);
-            params.put("location", update_location);
+            params.put("location", update_location);*/
 
             return requestHandler.sendPostRequest(URLS.URL_UPDATE, params);
         }
@@ -412,16 +410,16 @@ public class EditProfile extends AppCompatActivity {
                     last_name.setText(user.getLastname());
                     phone.setText(user.getPhone());
                     email.setText(user.getEmail());
-                    date_of_birth.setText(user.getDate_of_birth());
+                   /* date_of_birth.setText(user.getDate_of_birth());
                     raceType.setText(user.getRace_type());
                     Glide.with(EditProfile.this)
                             .load(user.getImage())
+                            .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                            .apply(RequestOptions.circleCropTransform())
                             .into(profile_picture);
                     height.setText(user.getHeight());
                     weight.setText(user.getWeight());
-                    location.setText(user.getLocation());
-
-
+                    location.setText(user.getLocation());*/
 
                 } else {
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();

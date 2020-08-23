@@ -180,7 +180,7 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ProductViewH
                 this.contact_id = contact;
                 this.athlete_id = athlete_id;
                 this.athlete_name = athlete_name;
-                this. athlete_Last_name = athlete_Last_name;
+                this.athlete_Last_name = athlete_Last_name;
             }
             @Override
             protected void onPreExecute() {

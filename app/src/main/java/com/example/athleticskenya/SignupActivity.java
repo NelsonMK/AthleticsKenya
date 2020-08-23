@@ -28,9 +28,10 @@ import java.util.HashMap;
 
 
 public class SignupActivity extends AppCompatActivity {
+
     EditText  editFirst, editLast, editPhone, editEmail, editPassword, editConfirm_password;
     Spinner spinner;
-    RadioGroup radioGender;
+    RadioGroup radioGender, radioUserType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class SignupActivity extends AppCompatActivity {
         radioGender = findViewById(R.id.radioGender);
         editPhone = findViewById(R.id.editTextPhone);
         editEmail = findViewById(R.id.editTextEmail);
-        spinner = findViewById(R.id.spinnerusertype);
+        radioUserType = findViewById(R.id.radioUserType);
         editPassword = findViewById(R.id.editTextPassword);
         editConfirm_password = findViewById(R.id.confirm_password);
 
@@ -77,12 +78,12 @@ public class SignupActivity extends AppCompatActivity {
         final String gender = ((RadioButton) findViewById(radioGender.getCheckedRadioButtonId())).getText().toString().trim();
         final String phone = editPhone.getText().toString().trim();
         final String email = editEmail.getText().toString().trim();
-        final String user_type = spinner.getSelectedItem().toString().trim();
+        final String user_type = ((RadioButton) findViewById(radioUserType.getCheckedRadioButtonId())).getText().toString().trim();
         String class1 = null;
         final String password = editPassword.getText().toString().trim();
         final String confirm_password = editConfirm_password.getText().toString().trim();
 
-        switch (user_type){
+        switch (user_type) {
             case "Athlete": class1="1";
                 break;
             case "Coach": class1="2";
@@ -170,7 +171,7 @@ public class SignupActivity extends AppCompatActivity {
         } else {
             pass.setError(null);
         }
-        if (password.equals(confirm_password)){
+        if (!password.equals(confirm_password)){
             c_pass.setError("Passwords do not match");
             editConfirm_password.requestFocus();
         } else {

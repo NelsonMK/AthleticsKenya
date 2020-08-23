@@ -38,6 +38,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.athleticskenya.getterClasses.Notifications;
 import com.example.athleticskenya.getterClasses.User;
 import com.google.android.material.navigation.NavigationView;
 
@@ -103,7 +104,6 @@ public class CoachActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
         View header = navigationView.getHeaderView(0);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +118,7 @@ public class CoachActivity extends AppCompatActivity
                 relativeLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(CoachActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(CoachActivity.this, EditProfile.class));
 
                     }
                 });
@@ -177,8 +177,9 @@ public class CoachActivity extends AppCompatActivity
 
         eventsList = new ArrayList<>();
 
-        registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        loadSQLiteEvents();
+        //registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
+        loadServerEvents();
 
     }
 
@@ -187,6 +188,18 @@ public class CoachActivity extends AppCompatActivity
         super.onStart();
         eventsList.clear();
         loadServerEvents();
+    }*/
+
+   /* @Override
+    protected void onDestroy(){
+        unregisterReceiver(new NetworkStateChecker());
+        super.onDestroy();
+    }*/
+
+   /* @Override
+    protected void onPause() {
+        unregisterReceiver(new NetworkStateChecker());
+        super.onPause();
     }*/
 
     @Override
@@ -251,19 +264,21 @@ public class CoachActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-           startActivity(new Intent(CoachActivity.this, AcceptedAthletes.class));
+            startActivity(new Intent(CoachActivity.this, AcceptedAthletes.class));
         } else if (id == R.id.nav_gallery) {
             startActivity(new Intent(CoachActivity.this, Training_GroundsActivity.class));
         } else if (id == R.id.nav_slideshow) {
             startActivity(new Intent(CoachActivity.this, Awards.class));
         } else if (id == R.id.athlete_request) {
             startActivity(new Intent(CoachActivity.this, Coach_Athlete_Request.class));
+        } else if (id == R.id.nav_notifications) {
+            startActivity(new Intent(CoachActivity.this, NotificationsActivity.class));
         } else if (id == R.id.nav_share) {
             feedback();
         } else if (id == R.id.nav_send) {
             Intent share = new Intent(Intent.ACTION_SEND);
             share.putExtra(Intent.EXTRA_TEXT,
-                    "\nFind more about athletics kenya in Athletics Kenya app available at play store");
+                    "\nFind more about athletics kenya in the official Athletics Kenya app available at play store");
             share.setType("text/plain");
             startActivity(Intent.createChooser(share, "Share To"));
 
@@ -274,7 +289,7 @@ public class CoachActivity extends AppCompatActivity
         return true;
     }
 
-    public boolean checkConnectivity(){
+    public boolean checkConnectivity() {
         ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -317,8 +332,8 @@ public class CoachActivity extends AppCompatActivity
                                 ));
                             }
 
-                            EventsAdapter adapter = new EventsAdapter(CoachActivity.this, eventsList);
-                            recyclerView.setAdapter(adapter);
+                            eventsAdapter = new EventsAdapter(CoachActivity.this, eventsList);
+                            recyclerView.setAdapter(eventsAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

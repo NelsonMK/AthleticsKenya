@@ -6,11 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SignupActivity">
 
-
         <RelativeLayout
             style="@style/parent">
-
-
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -37,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp">
 
@@ -75,6 +73,7 @@
                 android:id="@+id/editTextFirstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="13sp"
                 android:hint="First Name"
                 android:inputType="textPersonName">
                 <requestFocus/>
@@ -90,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last Name"
+                android:textSize="13sp"
                 android:inputType="textPersonName">
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="Gender"
-                android:textSize="18sp"/>
+                android:textSize="13sp"/>
 
             <RadioGroup
                 android:id="@+id/radioGender"
@@ -135,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="10"
+                android:textSize="13sp"
                 android:hint="Phone Number"
                 android:inputType="phone">
             </com.google.android.material.textfield.TextInputEditText>
@@ -150,28 +151,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                android:textSize="13sp"
                 android:inputType="textEmailAddress">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/user_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="User type"
-                android:textSize="18sp"/>
-            <Spinner
-                android:id="@+id/spinnerusertype"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/user_type"
-                android:entries="@array/users"
-                android:prompt="@string/user_prompt"/>
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:id="@+id/user_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="User type"
+                        android:textSize="13sp"/>
+                    <RadioGroup
+                        android:id="@+id/radioUserType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/user_label"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/athlete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Athlete"
+                            android:checked="true"/>
+                        <RadioButton
+                            android:id="@+id/coach"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Coach"/>
+                    </RadioGroup>
+                </RelativeLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password"
@@ -183,6 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:textSize="13sp"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -196,9 +214,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Confirm Password"
+                        android:textSize="13sp"
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
 
         <Button
             android:id="@+id/btn_register"

@@ -54,7 +54,7 @@ public class CoachListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_list);
 
-        toolbar = findViewById(R.id.toolbar);
+      /*  toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -65,7 +65,7 @@ public class CoachListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
-        });
+        });*/
 
         recyclerView = findViewById(R.id.recylcerView);
         recyclerView.setHasFixedSize(false);
@@ -75,7 +75,7 @@ public class CoachListActivity extends AppCompatActivity {
 
         coachList = new ArrayList<>();
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       /* spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String coach = adapterView.getItemAtPosition(i).toString();
@@ -96,7 +96,9 @@ public class CoachListActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
+
+        loadCoaches();
 
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.coachRefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -114,6 +116,8 @@ public class CoachListActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -129,14 +133,14 @@ public class CoachListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 coachAdapter.getFilter().filter(query);
-                coachAllAdapter.getFilter().filter(query);
+                //coachAllAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 coachAdapter.getFilter().filter(newText);
-                coachAllAdapter.getFilter().filter(newText);
+                //coachAllAdapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -151,7 +155,6 @@ public class CoachListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     private void loadCoaches() {
 

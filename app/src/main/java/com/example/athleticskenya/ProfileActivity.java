@@ -76,12 +76,31 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
         coach = findViewById(R.id.textViewMyCoachOrAthlete);
-        coach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, MyCoach.class));
-            }
-        });
+
+        final User user = db.getUser(id);
+
+
+            coach.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (user.getContact().isEmpty()) {
+                        new AlertDialog.Builder(ProfileActivity.this)
+                                .setTitle("Error")
+                                .setCancelable(false)
+                                .setMessage("This feature is only available if you are in contact with one of the coaches")
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    } else {
+                    startActivity(new Intent(ProfileActivity.this, MyCoach.class));
+                    }
+                }
+            });
+
 
         settings = findViewById(R.id.textViewSettings);
         settings.setOnClickListener(new View.OnClickListener() {

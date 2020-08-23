@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 public class NetworkStateChecker extends BroadcastReceiver {
 
-    //Context context;
     private DatabaseHandler db;
     static int noOfTimes = 0;
 
@@ -32,7 +31,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         db = new DatabaseHandler(context);
         noOfTimes++;
-        //Toast.makeText(context, "BC Service Running for " + noOfTimes + " times", Toast.LENGTH_SHORT).show();
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
@@ -50,7 +48,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                 try {
                                     // Extract JSON array from the response
                                     JSONArray arr = new JSONArray(response);
-                                    // System.out.println(arr.length());
                                     // If no of array elements is not zero
                                     if(arr.length() != 0){
                                         // Loop through each array element, get JSON object

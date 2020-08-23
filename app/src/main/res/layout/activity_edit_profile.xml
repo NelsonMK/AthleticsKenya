@@ -24,6 +24,7 @@
                 android:background="@color/white"
                 android:src="@drawable/person"
                 />
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="21dp"
@@ -65,7 +66,6 @@
                         <requestFocus />
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text2"
@@ -121,6 +121,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:visibility="gone"
                     android:id="@+id/text9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,6 +141,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:visibility="gone"
                     android:id="@+id/text10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,6 +156,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,6 +190,7 @@
                         android:layout_weight="1">
 
                         <com.google.android.material.textfield.TextInputEditText
+
                             android:id="@+id/weight"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -198,6 +202,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:visibility="gone"
                     android:id="@+id/text8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -213,7 +218,6 @@
                         android:inputType="textEmailAddress"
                         android:textColor="#000000"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <Button
                     android:id="@+id/upload"
